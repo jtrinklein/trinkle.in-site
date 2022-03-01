@@ -1,0 +1,3 @@
+name: PrStat
+runtime: nodejs
+description: A simple utility to track pull requests in Azure Dev Ops
