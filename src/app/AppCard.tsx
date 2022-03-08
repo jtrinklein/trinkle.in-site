@@ -21,8 +21,8 @@ export default class AppCard extends React.Component {
         const hasLink = !!this.props.url;
         const {imagePath, url, name, description} = this.props;
         return (
-            <RbCard style={{ width: '18rem' }}>
-                {hasImg && (<RbCard.Img variant="top" src={imagePath} /> ) }
+            <RbCard style={{ width: '18rem', marginTop: '6px', marginBottom: '6px' }}>
+                {hasImg && (<RbCard.Img variant="top" style={{maxWidth: '120px'}} src={imagePath} /> ) }
                 <RbCard.Body>
                     <RbCard.Title>{name}</RbCard.Title>
                     <RbCard.Text>
