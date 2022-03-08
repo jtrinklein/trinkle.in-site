@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -32,14 +33,29 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'trinkle.in',
-    meta: {
-      charset: "utf-8",
-      description: "Apps made by jtrinklein.",
-      keywords: "trinklein,apps,jtrinklein",
-    }
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'trinkle.in',
+      meta: {
+        charset: "utf-8",
+        description: "Apps made by jtrinklein.",
+        keywords: "trinklein,apps,jtrinklein",
+      }
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          // If absolute path is a `glob` we replace backslashes
+          //  with forward slashes, because only forward slashes
+          //  can be used in the `glob`
+          from: path.resolve(__dirname, 'www', '*').replace(/\\/g, '/'),
+          to(ctx, absoluteFilename) {
+            return '[name][ext]'
+          }
+        },
+      ]
+    }),
+  ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
